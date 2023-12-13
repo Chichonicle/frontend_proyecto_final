@@ -4,17 +4,21 @@ import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { useNavigate } from "react-router-dom";
 import { logUser } from "../../services/apicalls";
-
+import { useDispatch } from "react-redux";  //useDispatch es necesario para emitir acciones
+import { login } from "../userSlice";
 
 
 export const Login = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [credenciales, setCredenciales] = useState({
         username: "",
         password: "",
     });
+
+    const [msgError, setMsgError] = useState("");
 
     const functionHandler = (e) => {
         setCredenciales((prevState) => ({
@@ -23,12 +27,17 @@ export const Login = () => {
         }));
     };
 
+    const errorCheck = () => {
+        console.log("Falta la palabra mágica");
+    }
+
     const logMe = () => {
 
         logUser(credenciales)
         .then(
             resultado => {
                 console.log(resultado)
+                dispatch(login({credentials: resultado.data}))
 
                 setTimeout(() => {
                     navigate("/");
@@ -43,21 +52,28 @@ export const Login = () => {
         <div className="loginDesign">
             <div className="Name">Username</div>
             <CustomInput
+                disabled={false}
                 design={"inputDesign"}
                 type={"text"}
                 name={"username"}
                 placeholder={""}
+                value={""}
                 functionProp={functionHandler}
+                functionBlur={errorCheck}
             />
             <div className="Name">Password</div>
             <CustomInput
+                disabled={false}
                 design={"inputDesign"}
                 type={"password"}
                 name={"password"}
+                value={""}
                 placeholder={""}
                 functionProp={functionHandler}
+                functionBlur={errorCheck}
             />
             <div className="buttonSubmit" onClick={logMe}>Log Me!</div>
+            <div>{msgError}</div>
         </div>
     );
 };
