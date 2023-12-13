@@ -1,4 +1,4 @@
-import "./LinkButton.scss";
+import "./LinkButton.css";
 
 import { useNavigate } from "react-router-dom";
 

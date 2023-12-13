@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Header.scss";
+import "./Header.css";
 import { LinkButton } from "../LinkButton/LinkButton";
 
 export const Header = () => {
