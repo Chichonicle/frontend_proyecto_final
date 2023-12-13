@@ -3,9 +3,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
 import thunk from "redux-thunk";
-const reducers = combineReducers({
-
-});
+const reducers = combineReducers({});
 
 const persistConfig = {
   key: "root",
@@ -20,4 +18,4 @@ export default configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }).concat(thunk),
-});   
+});

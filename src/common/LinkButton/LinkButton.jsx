@@ -1,15 +1,13 @@
-
 import "./LinkButton.scss";
 
 import { useNavigate } from "react-router-dom";
 
 export const LinkButton = ({ path, tittle }) => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    return (
-        <div className="linkButtonDesign" onClick={()=>navigate(path)}>
-            {tittle}
-        </div>
-    )
-}
+  return (
+    <div className="linkButtonDesign" onClick={() => navigate(path)}>
+      {tittle}
+    </div>
+  );
+};
