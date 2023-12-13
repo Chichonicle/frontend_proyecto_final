@@ -1,0 +1,17 @@
+.profileDesign {
+
+    height: 90vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(136, 100, 253);
+}
+
+.Name {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}

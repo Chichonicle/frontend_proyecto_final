@@ -3,6 +3,7 @@ import "./Profile.css";
 import { userData } from "../userSlice";
 import { validator } from "../../services/useful";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
+import { useState } from "react";
 
 export const Profile = () => {
   const rdxUser = useSelector(userData);
