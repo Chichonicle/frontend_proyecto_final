@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import userSlice from '../pages/userSlice';
 
 // import tokenSlice from "../views/tokenSlice";
 import { combineReducers } from "redux";
@@ -7,6 +8,7 @@ import { persistReducer } from "redux-persist";
 
 import { thunk } from "redux-thunk";
 const reducers = combineReducers({
+  user: userSlice,
   // token: tokenSlice,
 });
 
