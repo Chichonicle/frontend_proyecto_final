@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { useNavigate } from "react-router-dom";
+import { logUser } from "../../services/apicalls";
 
 
 
@@ -40,6 +41,7 @@ export const Login = () => {
 
     return (
         <div className="loginDesign">
+            <div className="Name">Username</div>
             <CustomInput
                 design={"inputDesign"}
                 type={"text"}
@@ -47,6 +49,7 @@ export const Login = () => {
                 placeholder={""}
                 functionProp={functionHandler}
             />
+            <div className="Name">Password</div>
             <CustomInput
                 design={"inputDesign"}
                 type={"password"}
