@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
+import { validator } from "../../services/useful";
+import { registerUser } from "../../services/apicalls";
+import "./Register.css";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -124,8 +127,6 @@ export const Register = () => {
       <div className="errorMsg">{userError.passwordError}</div>
 
       <div className="errorMsg">{userError.nameError}</div>
-      <div className="errorMsg">{userError.surnameError}</div>
-      <div className="errorMsg">{userError.usernameError}</div>
       <div className="buttonSubmit" onClick={Submit}>
         Submit
       </div>
