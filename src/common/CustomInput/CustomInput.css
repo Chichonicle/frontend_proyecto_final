@@ -1,0 +1,10 @@
+.inputDesign {
+
+    height: 2em;
+    width: 15em;
+
+    border-radius: 1em;
+    border: 0.5 solid rgb(203, 116, 116);
+
+    margin-bottom: 4em;
+}
