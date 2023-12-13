@@ -17,7 +17,7 @@
     width: 8em;
 
     border-radius: 1em;
-    background-color: rgb(238, 135, 130);
+    background-color: rgb(245, 4, 4);
     color: white;
     font-weight: bolder;
 
@@ -29,6 +29,6 @@
 .buttonSubmit:hover {
 
     transition: 0.4s;
-    background-color: rgb(226, 80, 43);
+    background-color: rgb(216, 109, 31);
     cursor: pointer;
 }

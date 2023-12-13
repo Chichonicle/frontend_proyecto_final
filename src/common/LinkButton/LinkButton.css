@@ -12,6 +12,6 @@
 .linkButtonDesign:hover {
 
     transition: 0.4s;
-    color: grey;
+    color: rgb(0, 0, 0);
     cursor: pointer;
 }

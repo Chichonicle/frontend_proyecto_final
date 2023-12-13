@@ -9,5 +9,5 @@ export const LinkButton = ({ path, tittle }) => {
     <div className="linkButtonDesign" onClick={() => navigate(path)}>
       {tittle}
     </div>
-  );
-};
+  )
+}
