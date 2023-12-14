@@ -3,10 +3,11 @@ import "./Profile.css";
 import { userData } from "../userSlice";
 import { validator } from "../../services/useful";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Profile = () => {
   const rdxUser = useSelector(userData);
+  const navigate = useNavigate();
 
   const [profile, setProfile] = useState({
     name: rdxUser.credentials.user.name,
@@ -16,11 +17,23 @@ export const Profile = () => {
     role: rdxUser.credentials.user.role,
   });
 
+  useEffect(() => {
+    if (!rdxUser.credentials.token) {
+      navigate("/");
+    }
+  }, [rdxUser]);
+
   const errorCheck = (e) => {
     let error = "";
 
     error = validator(e.target.name, e.target.value);
   };
+
+  setProfileError((prevState) => ({
+    ...prevState,
+    [e.target.user.username + "Error"]: error,
+    }));
+
 
   const functionHandler = (e) => {
     setProfile((prevState) => ({
