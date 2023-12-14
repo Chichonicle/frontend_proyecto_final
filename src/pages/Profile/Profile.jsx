@@ -4,10 +4,12 @@ import { userData } from "../userSlice";
 import { validator } from "../../services/useful";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 export const Profile = () => {
   const rdxUser = useSelector(userData);
   const navigate = useNavigate();
+  const token = rdxUser.credentials
 
   const [profile, setProfile] = useState({
     name: rdxUser.credentials.user.name,
@@ -15,7 +17,18 @@ export const Profile = () => {
     username: rdxUser.credentials.user.username,
     email: rdxUser.credentials.user.email,
     role: rdxUser.credentials.user.role,
+    password: rdxUser.credentials.user.password,
+  })
+
+  const [profileError, setProfileError] = useState({
+    nameError: "",
+    surnameError: "",
+    usernameError: "",
+    emailError: "",
+    roleError: "",
+    passwordError: "",
   });
+  
 
   useEffect(() => {
     if (!rdxUser.credentials.token) {
@@ -29,10 +42,10 @@ export const Profile = () => {
     error = validator(e.target.name, e.target.value);
   };
 
-  setProfileError((prevState) => ({
-    ...prevState,
-    [e.target.user.username + "Error"]: error,
-    }));
+  // setProfileError((prevState) => ({
+  //   ...prevState,
+  //   [e.target.user.username + "Error"]: error,
+  //   }));
 
 
   const functionHandler = (e) => {
