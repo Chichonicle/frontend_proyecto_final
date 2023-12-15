@@ -40,12 +40,9 @@ export const Profile = () => {
     let error = "";
 
     error = validator(e.target.name, e.target.value);
-  };
+ 
 
-  // setProfileError((prevState) => ({
-  //   ...prevState,
-  //   [e.target.user.username + "Error"]: error,
-  //   }));
+  };
 
 
   const functionHandler = (e) => {

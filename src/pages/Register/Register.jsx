@@ -79,6 +79,7 @@ export const Register = () => {
         functionProp={functioHandler}
         functionBlur={errorCheck}
       />
+       <div className="errorMsg">{userError.nameError}</div>
       <div className="Name">Surname</div>
       <CustomInput
         design={`inputDesign ${
@@ -90,6 +91,7 @@ export const Register = () => {
         functionProp={functioHandler}
         functionBlur={errorCheck}
       />
+      <div className="errorMsg">{userError.surnameError}</div>
       <div className="Name">Username</div>
       <CustomInput
         design={`inputDesign ${
@@ -101,6 +103,7 @@ export const Register = () => {
         functionProp={functioHandler}
         functionBlur={errorCheck}
       />
+      <div className="errorMsg">{userError.usernameError}</div>
       <div className="Name">Email</div>
       <CustomInput
         design={`inputDesign ${
@@ -126,7 +129,7 @@ export const Register = () => {
       />
       <div className="errorMsg">{userError.passwordError}</div>
 
-      <div className="errorMsg">{userError.nameError}</div>
+     
       <div className="buttonSubmit" onClick={Submit}>
         Submit
       </div>

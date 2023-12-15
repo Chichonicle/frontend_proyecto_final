@@ -15,9 +15,8 @@ export const validator = (type, value) => {
 
         case 'name':
         case 'surname':
-        case 'username':
 
-            if(value.length > 25 ){
+            if(value.length > 20 || value.length < 3 ){
                 return "Escribe un nombre correcto"
             } else {
                 return ""
@@ -48,6 +47,14 @@ export const validator = (type, value) => {
                     return "";
                 }
             }
+            case 'username':
+
+            if(value.length > 20 || value.length < 3 ){
+                return "Escribe un nick correcto"
+            } else {
+                return ""
+            }
+
 
 
     }
