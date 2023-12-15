@@ -18,10 +18,16 @@ export const getProfile = async (token) => {
     });
 }
 
-export const updateProfile = async (token, body) => {
-    return await axios.put("http://localhost:8000/api/update", body, {
+export const updateProfile = async (profile, datosRdxUser) => {
+    try {
+      const tokenHeader = {
         headers: {
-            Authorization: `Bearer ${token}`
+          'Authorization': `Bearer ${datosRdxUser.credentials.token}`
         }
-    });
-}
+      };
+  
+      return await axios.put('http://localhost:8000/api/update', profile, tokenHeader);
+    } catch (error) {
+      console.log(error);
+    }
+  };

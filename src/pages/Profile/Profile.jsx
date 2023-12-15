@@ -1,15 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
-import { userData } from "../userSlice";
+import { login, userData } from "../userSlice";
 import { validator } from "../../services/useful";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { updateProfile } from "../../services/apicalls";
 
 export const Profile = () => {
-  const rdxUser = useSelector(userData);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = rdxUser.credentials
+  const rdxUser = useSelector(userData);
 
   const [profile, setProfile] = useState({
     name: rdxUser.credentials.user.name,
@@ -20,6 +21,8 @@ export const Profile = () => {
     password: rdxUser.credentials.user.password,
   })
 
+  const token = rdxUser.credentials.token;
+
   const [profileError, setProfileError] = useState({
     nameError: "",
     surnameError: "",
@@ -28,20 +31,39 @@ export const Profile = () => {
     roleError: "",
     passwordError: "",
   });
+
+  const [isEnabled, setIsEnabled] = useState(true);
   
 
   useEffect(() => {
-    if (!rdxUser.credentials.token) {
+    if (!rdxUser.credentials) {
       navigate("/");
+    } else {
+      // Cargar datos del perfil al montar el componente
+      setProfile({
+        name: rdxUser.credentials.user.name,
+        surname: rdxUser.credentials.user.surname,
+        username: rdxUser.credentials.user.username,
+        email: rdxUser.credentials.user.email,
+        role: rdxUser.credentials.user.role,
+        password: rdxUser.credentials.user.password,
+      });
     }
-  }, [rdxUser]);
+  }, [rdxUser.credentials]);
+
+  useEffect(() => {
+    console.log ("Perfil actualizado:", profile);
+  }, [profile]);
 
   const errorCheck = (e) => {
     let error = "";
 
     error = validator(e.target.name, e.target.value);
+    setProfileError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }));
  
-
   };
 
 
@@ -52,11 +74,23 @@ export const Profile = () => {
     }));
   };
 
+  const sendData = () => {
+    updateProfile(profile, rdxUser)
+    .then(result => {
+      dispatch(login(profile));
+      setIsEnabled(true);
+    })
+    .catch(error => {
+      console.log(error);
+      setIsEnabled(true);
+    });
+  }
+
   return (
     <div className="profileDesign">
       <div className="Name">Nombre</div>
       <CustomInput
-        disabled={true}
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"name"}
@@ -67,7 +101,7 @@ export const Profile = () => {
       />
       <div className="Name">Apellido</div>
       <CustomInput
-        disabled={true}
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"surname"}
@@ -78,7 +112,7 @@ export const Profile = () => {
       />
       <div className="Name">Nick</div>
       <CustomInput
-        disabled={true}
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"username"}
@@ -89,7 +123,7 @@ export const Profile = () => {
       />
       <div className="Name">Email</div>
       <CustomInput
-        disabled={true}
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"email"}
@@ -109,6 +143,9 @@ export const Profile = () => {
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
+      {isEnabled
+      ? (<div className="buttonSubmit" onClick={()=> setIsEnabled(!isEnabled)}>EDIT</div>)
+      : (<div className="buttonSubmit" onClick={()=> sendData()}>SAVE</div>)}
     </div>
   );
 };
