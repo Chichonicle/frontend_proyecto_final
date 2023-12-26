@@ -1,12 +1,52 @@
 
 .homeDesign {
-    height: 90vh;
+    min-height: 90vh;
     width: 100vw;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: auto;
+    margin-top: 0px;
 
     background-color: rgb(136, 100, 253);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    background-color: lightseagreen;
 }
+
+.avatarSerie {
+    margin: 2em;
+    height: 10em;
+    
+}
+
+
+.proyectDesign {
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 1em;
+    background-color: transparent;
+    height: 15em;
+    padding: 0.5em;
+    color: white;
+    max-width: 15em;
+    max-height: 15em;
+    
+  
+}
+
+.card:hover {
+    transition: 0.5s;
+    background-color: orange;
+}
+
+
+    .gallery {
+        max-height: 500px;
+        margin-top: 600px;
+        background-color: red;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }

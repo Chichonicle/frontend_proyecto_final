@@ -10,7 +10,7 @@ export const Home = () => {
     if (series.length === 0) {
       GetSeries()
       .then((series)=>{
-        setSeries(series.data.series);
+        setSeries(series.data.data);console.log(series.data);
       })
       .catch((error) => console.log(error));
     }
@@ -23,11 +23,11 @@ export const Home = () => {
         {series.map((series) => {
           return (
             <div className="card" key={series.id}>
-              {series.title}
+              {series.name}
               <img
               className="avatarSerie"
-              src={series.img}
-              alt={series.title}
+              src={series.picture}
+              alt={series.name}
               />
             </div>
           );
