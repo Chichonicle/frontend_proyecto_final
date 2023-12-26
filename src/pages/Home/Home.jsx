@@ -10,7 +10,7 @@ export const Home = () => {
     if (series.length === 0) {
       GetSeries()
       .then((series)=>{
-        setSeries(series.data.data);console.log(series.data);
+        setSeries(series.data.data);
       })
       .catch((error) => console.log(error));
     }
