@@ -1,12 +1,10 @@
-
 .homeDesign {
     min-height: 90vh;
     width: 100vw;
     height: auto;
     margin-top: 0px;
-
-    background-color: rgb(136, 100, 253);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    background-color: lightseagreen;
+    background-image: url('../../img/home.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
 }

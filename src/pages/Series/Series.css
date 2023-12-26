@@ -4,10 +4,13 @@
     height: auto;
     margin-top: 0px;
 
-    background-color: rgb(136, 100, 253);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    background-color: lightseagreen;
+    background-image: url('../../img/home.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    
 }
 
 .avatarSerie {
@@ -28,7 +31,6 @@
     background-color: transparent;
     height: 15em;
     padding: 0.5em;
-    color: rgb(252, 252, 252);
     max-width: 15em;
     max-height: 15em;
     
