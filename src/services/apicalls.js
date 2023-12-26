@@ -31,3 +31,7 @@ export const updateProfile = async (profile, datosRdxUser) => {
       console.log(error);
     }
   };
+
+  export const GetSeries = async () => {
+    return await axios.get(`http://localhost:8000/api/series`);
+  };

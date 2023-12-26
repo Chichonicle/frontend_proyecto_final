@@ -1,27 +1,31 @@
-import { useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
 import { login, userData } from "../userSlice";
 import { validator } from "../../services/useful";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { updateProfile } from "../../services/apicalls";
+import { getProfile, updateProfile } from "../../services/apicalls";
 
 export const Profile = () => {
+  
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const rdxUser = useSelector(userData);
+  const token = rdxUser.credentials.token;
+  const navigate = useNavigate();
+  const [isEnabled, setIsEnabled] = useState(true);
+  const [msgError, setMsgError] = useState();
+
 
   const [profile, setProfile] = useState({
-    name: rdxUser.credentials.user.name,
-    surname: rdxUser.credentials.user.surname,
-    username: rdxUser.credentials.user.username,
-    email: rdxUser.credentials.user.email,
-    role: rdxUser.credentials.user.role,
-    password: rdxUser.credentials.user.password,
+    name: "",
+    surname: "",
+    username: "",
+    email: "",
+    role: "",
+    password: "",
   })
 
-  const token = rdxUser.credentials.token;
 
   const [profileError, setProfileError] = useState({
     nameError: "",
@@ -30,30 +34,30 @@ export const Profile = () => {
     emailError: "",
     roleError: "",
     passwordError: "",
-  });
+  })
 
-  const [isEnabled, setIsEnabled] = useState(true);
+  useEffect(() => {
+    console.log(rdxUser);
+  }, [rdxUser]);
+
   
 
   useEffect(() => {
-    if (!rdxUser.credentials) {
-      navigate("/");
-    } else {
-      // Cargar datos del perfil al montar el componente
-      setProfile({
-        name: rdxUser.credentials.user.name,
-        surname: rdxUser.credentials.user.surname,
-        username: rdxUser.credentials.user.username,
-        email: rdxUser.credentials.user.email,
-        role: rdxUser.credentials.user.role,
-        password: rdxUser.credentials.user.password,
-      });
+    setMsgError("")
+    for (let test in profile) {
+      if (profile[test] === "") {
+        getProfile(token)
+        .then ((result) => {
+          setProfile(result.data.data);
+        })
+        .catch((error) => console.log(error));
     }
-  }, [rdxUser.credentials]);
+  }
+  },[profile]);
 
-  useEffect(() => {
-    console.log ("Perfil actualizado:", profile);
-  }, [profile]);
+  // useEffect(() => {
+  //   console.log ("Perfil actualizado:", profile);
+  // }, [profile]);
 
   const errorCheck = (e) => {
     let error = "";
@@ -63,8 +67,7 @@ export const Profile = () => {
       ...prevState,
       [e.target.name + "Error"]: error,
     }));
- 
-  };
+  }
 
 
   const functionHandler = (e) => {
