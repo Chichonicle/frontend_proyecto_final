@@ -26,6 +26,7 @@ export const Header = () => {
   return (
     <div className="headerDesign">
       <LinkButton path={"/"} title={"Home"} />
+      <LinkButton path={"/series"} title={"Series"} />
 
       {!rdxUser?.credentials.user ? (
         <>
