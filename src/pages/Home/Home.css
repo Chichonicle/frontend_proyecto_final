@@ -7,4 +7,32 @@
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center;
+    display: flex; /* Añade esta línea */
+    justify-content: center; /* Añade esta línea */
+    align-items: center; /* Añade esta línea */
 }
+
+.carousel-item {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s, transform 2s;
+  }
+  
+  .carousel-item.active {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+  }
+  
+  .carousel-item-next.carousel-item-left,
+  .carousel-item-prev.carousel-item-right {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .carousel-item-next,
+  .carousel-item-prev,
+  .carousel-item.active.carousel-item-left,
+  .carousel-item.active.carousel-item-right {
+    transform: translateX(100%);
+  }
