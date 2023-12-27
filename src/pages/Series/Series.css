@@ -1,3 +1,8 @@
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .serieDesign {
   min-height: 90vh;
   width: 100vw;
