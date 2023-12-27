@@ -28,7 +28,7 @@
     height: 100%;
     max-width: 100%;
     margin: 2em;
-    transition: all 0.5s ease;
+    transition: all 1s ease;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     overflow: hidden;
 }

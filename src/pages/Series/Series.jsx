@@ -34,6 +34,7 @@ export const Series = () => {
                   <div className="extra-info">
                     <p>Género: {serie.genre}</p>
                     <p>Año: {serie.year}</p>
+                    <a href={serie.url} target="_blank" rel="noopener noreferrer">Ver ahora</a>
                   </div>
                 </div>
               </div>
