@@ -51,3 +51,11 @@ export const updateProfile = async (profile, datosRdxUser) => {
       }
     });
   }
+
+  export const DeleteMessage = async (token, id) => {
+    return await axios.delete(`http://localhost:8000/api/deleteMessage/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
