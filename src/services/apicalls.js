@@ -59,3 +59,11 @@ export const updateProfile = async (profile, datosRdxUser) => {
       }
     });
   }
+
+  export const joinToSerie = async (token, body) => {
+    return await axios.post(`http://localhost:8000/api/member`, body , {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }

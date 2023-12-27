@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Card, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 import "./Series.css";
 import { GetSeries } from "../../services/apicalls";
@@ -8,6 +9,7 @@ import { userData } from "../userSlice";
 
 export const Series = () => {
   const [series, setSeries] = useState([]);
+  const [hoveredSerieId, setHoveredSerieId] = useState(null);
 
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
@@ -28,8 +30,13 @@ export const Series = () => {
         <>
           {series.map((serie) => {
             return (
-              <Card style={{ width: "18rem" }} key={serie.id}>
+              <Card style={{ width: "18rem" }} key={serie.id} onMouseEnter={() => setHoveredSerieId(serie.id)} onMouseLeave={() => setHoveredSerieId(null)}>
                 <Card.Img variant="top" src={serie.picture} />
+                {hoveredSerieId === serie.id && (
+                  <Link to="/chat">
+                    <Button>Ir al chat</Button>
+                  </Link>
+                )}
                 <Card.Body>
                   <Card.Title>{serie.name}</Card.Title>
                   <Card.Text>
