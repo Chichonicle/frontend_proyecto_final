@@ -1,4 +1,4 @@
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
 import { login, userData } from "../userSlice";
 import { validator } from "../../services/useful";
@@ -8,14 +8,12 @@ import { useNavigate } from "react-router";
 import { getProfile, updateProfile } from "../../services/apicalls";
 
 export const Profile = () => {
-  
   const dispatch = useDispatch();
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
   const navigate = useNavigate();
   const [isEnabled, setIsEnabled] = useState(true);
   const [msgError, setMsgError] = useState();
-
 
   const [profile, setProfile] = useState({
     name: "",
@@ -24,8 +22,7 @@ export const Profile = () => {
     email: "",
     role: "",
     password: "",
-  })
-
+  });
 
   const [profileError, setProfileError] = useState({
     nameError: "",
@@ -34,26 +31,24 @@ export const Profile = () => {
     emailError: "",
     roleError: "",
     passwordError: "",
-  })
+  });
 
   useEffect(() => {
     console.log(rdxUser);
   }, [rdxUser]);
 
-  
-
   useEffect(() => {
-    setMsgError("")
+    setMsgError("");
     for (let test in profile) {
       if (profile[test] === "") {
         getProfile(token)
-        .then ((result) => {
-          setProfile(result.data.data);
-        })
-        .catch((error) => console.log(error));
+          .then((result) => {
+            setProfile(result.data.data);
+          })
+          .catch((error) => console.log(error));
+      }
     }
-  }
-  },[profile]);
+  }, [profile]);
 
   // useEffect(() => {
   //   console.log ("Perfil actualizado:", profile);
@@ -67,8 +62,7 @@ export const Profile = () => {
       ...prevState,
       [e.target.name + "Error"]: error,
     }));
-  }
-
+  };
 
   const functionHandler = (e) => {
     setProfile((prevState) => ({
@@ -79,15 +73,15 @@ export const Profile = () => {
 
   const sendData = () => {
     updateProfile(profile, rdxUser)
-    .then(result => {
-      dispatch(login(profile));
-      setIsEnabled(true);
-    })
-    .catch(error => {
-      console.log(error);
-      setIsEnabled(true);
-    });
-  }
+      .then((result) => {
+        dispatch(login(profile));
+        setIsEnabled(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsEnabled(true);
+      });
+  };
 
   return (
     <div className="profileDesign">
@@ -146,9 +140,15 @@ export const Profile = () => {
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
-      {isEnabled
-      ? (<div className="buttonSubmit" onClick={()=> setIsEnabled(!isEnabled)}>EDIT</div>)
-      : (<div className="buttonSubmit" onClick={()=> sendData()}>SAVE</div>)}
+      {isEnabled ? (
+        <div className="buttonSubmit" onClick={() => setIsEnabled(!isEnabled)}>
+          EDIT
+        </div>
+      ) : (
+        <div className="buttonSubmit" onClick={() => sendData()}>
+          SAVE
+        </div>
+      )}
     </div>
   );
 };
