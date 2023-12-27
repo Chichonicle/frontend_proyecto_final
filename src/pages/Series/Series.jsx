@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux'; // Añade esta línea
 
 import "./Series.css";
 import { GetSeries } from "../../services/apicalls";
+import { userData } from "../userSlice";
 
 export const Series = () => {
   const  [series, setSeries] = useState([]);
+
+  const rdxUser = useSelector(userData); // Añade esta línea
+  const token = rdxUser.credentials.token; // Añade esta línea
 
   useEffect(() => {
     if (series.length === 0) {
@@ -34,7 +39,7 @@ export const Series = () => {
                   <div className="extra-info">
                     <p>Género: {serie.genre}</p>
                     <p>Año: {serie.year}</p>
-                    <a href={serie.url} target="_blank" rel="noopener noreferrer">Ver ahora</a>
+                    {token && <a href={serie.url} target="_blank" rel="noopener noreferrer">Ver ahora</a>} {/* Modifica esta línea */}
                   </div>
                 </div>
               </div>
