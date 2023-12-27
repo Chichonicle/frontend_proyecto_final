@@ -21,18 +21,33 @@
   border-radius: 10px;
   padding: 2em;
   text-align: center;
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
 }
 
 .serieDesign .card:hover {
   background-color: #000000;
   color: white;
   border-radius: 10px;
-  padding: 2em;
+  /* padding: 2em; */
   text-align: center;
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
+}
+.serieDesign .card .image-container {
+  position: relative;
 }
 
-.card {
-  margin: 2em;
+.serieDesign .card .image-container .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.serieDesign .card .image-container .overlay .chat-button {
+  z-index: 1;
 }

@@ -31,12 +31,16 @@ export const Series = () => {
           {series.map((serie) => {
             return (
               <Card style={{ width: "18rem" }} key={serie.id} onMouseEnter={() => setHoveredSerieId(serie.id)} onMouseLeave={() => setHoveredSerieId(null)}>
-                <Card.Img variant="top" src={serie.picture} />
-                {hoveredSerieId === serie.id && (
-                  <Link to="/chat">
-                    <Button>Ir al chat</Button>
-                  </Link>
-                )}
+                <div className="image-container">
+                  <Card.Img variant="top" src={serie.picture} />
+                  {hoveredSerieId === serie.id && (
+                    <div className="overlay">
+                      <Link to="/chat" className="chat-button">
+                        <Button>Ir al chat</Button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
                 <Card.Body>
                   <Card.Title>{serie.name}</Card.Title>
                   <Card.Text>
