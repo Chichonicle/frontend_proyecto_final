@@ -20,16 +20,24 @@ export const Series = () => {
     <div className="serieDesign">
       {series.length > 0 ? (
         <>
-        {series.map((series) => {
+        {series.map((serie) => {
           return (
-            <div className="card" key={series.id}>
-              {series.name}
-              <img
-              className="avatarSerie"
-              src={series.picture}
-              alt={series.name}
-              />
-            </div>
+            <div className="card-container" key={serie.id}> 
+              <div className="card">
+                <div className="card-content">
+                  <div className="name">{serie.name}</div>
+                  <img
+                    className="avatarSerie"
+                    src={serie.picture}
+                    alt={serie.name}
+                  />
+                  <div className="extra-info">
+                    <p>Género: {serie.genre}</p>
+                    <p>Año: {serie.year}</p>
+                  </div>
+                </div>
+              </div>
+            </div> 
           );
         })}
         </>
@@ -37,5 +45,5 @@ export const Series = () => {
         <div> Aun no hay series</div>
       )}
     </div>
-  );
+);
 };
