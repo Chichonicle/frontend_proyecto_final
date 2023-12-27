@@ -35,3 +35,19 @@ export const updateProfile = async (profile, datosRdxUser) => {
   export const GetSeries = async () => {
     return await axios.get(`http://localhost:8000/api/series`);
   };
+
+  export const GetMessages = async (token, body) => {
+    return await axios.get(`http://localhost:8000/api/message`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  };
+
+  export const CreateMessage = async (token, body) => {
+    return await axios.post(`http://localhost:8000/api/createMessage`, body , {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
