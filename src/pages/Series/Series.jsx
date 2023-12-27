@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux'; // Añade esta línea
+import { useSelector } from 'react-redux';
+import { Card, Button } from 'react-bootstrap'; // Importa Card y Button de react-bootstrap
 
 import "./Series.css";
 import { GetSeries } from "../../services/apicalls";
@@ -8,8 +9,8 @@ import { userData } from "../userSlice";
 export const Series = () => {
   const  [series, setSeries] = useState([]);
 
-  const rdxUser = useSelector(userData); // Añade esta línea
-  const token = rdxUser.credentials.token; // Añade esta línea
+  const rdxUser = useSelector(userData);
+  const token = rdxUser.credentials.token;
 
   useEffect(() => {
     if (series.length === 0) {
@@ -27,23 +28,18 @@ export const Series = () => {
         <>
         {series.map((serie) => {
           return (
-            <div className="card-container" key={serie.id}> 
-              <div className="card">
-                <div className="card-content">
-                  <div className="name">{serie.name}</div>
-                  <img
-                    className="avatarSerie"
-                    src={serie.picture}
-                    alt={serie.name}
-                  />
-                  <div className="extra-info">
-                    <p>Género: {serie.genre}</p>
-                    <p>Año: {serie.year}</p>
-                    {token && <a href={serie.url} target="_blank" rel="noopener noreferrer">Ver ahora</a>} {/* Modifica esta línea */}
-                  </div>
-                </div>
-              </div>
-            </div> 
+            <Card style={{ width: '18rem' }} key={serie.id}>
+              <Card.Img variant="top" src={serie.picture} />
+              <Card.Body>
+                <Card.Title>{serie.name}</Card.Title>
+                <Card.Text>
+                  Género: {serie.genre}
+                  <br/>
+                  Año: {serie.year}
+                </Card.Text>
+                {token && <Button variant="primary" href={serie.url} target="_blank" rel="noopener noreferrer">Ver ahora</Button>}
+              </Card.Body>
+            </Card>
           );
         })}
         </>
@@ -51,5 +47,5 @@ export const Series = () => {
         <div> Aun no hay series</div>
       )}
     </div>
-);
+  );
 };

@@ -1,50 +1,39 @@
 .serieDesign {
     min-height: 90vh;
     width: 100vw;
-    height: auto;
-    margin-top: 0px;
+    height: cover;
+    justify-items: center;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
     background-image: url('../../img/home.jpg');
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center; 
-    gap: 1em;
+    margin: 0;
+    padding: 2em;
 }
 
-.avatarSerie {
+.serieDesign .card {
     margin: 2em;
-    height: 10em;
+    background-color: #000000aa;
+    color: white;
+    border-radius: 10px;
+    padding: 2em;
+    text-align: center;
+    font-size: 1.5em;
 }
 
-.card-container {
-    position: relative;
-    height: 300px; 
-    width: 300px; 
+.serieDesign .card:hover {
+    background-color: #000000;
+    color: white;
+    border-radius: 10px;
+    padding: 2em;
+    text-align: center;
+    font-size: 1.5em;
 }
 
 .card {
-    height: 100%;
-    max-width: 100%;
     margin: 2em;
-    transition: all 1s ease;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    overflow: hidden;
-}
-
-.card:hover {
-    background-color: rgb(50, 234, 221);
-    z-index: 1;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    position: absolute; 
-    transform: translateY(-10px);
-}
-
-.card .extra-info {
-    display: none;
-}
-
-.card:hover .card-content .extra-info {
-    display: block;
+    
 }
