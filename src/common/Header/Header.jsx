@@ -33,7 +33,7 @@ export const Header = () => {
 
       {Admin && (
         <div>
-        <LinkButton path={"/allUsers"} title={"Users"} />
+        <LinkButton path={"/Users"} title={"Users"} />
         </div>
       )}
 

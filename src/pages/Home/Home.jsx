@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Carousel } from 'react-bootstrap'; // Añade esta línea
+import { Carousel } from 'react-bootstrap'; 
 
 import "./Home.css";
 import { GetSeries } from "../../services/apicalls";
@@ -28,7 +28,7 @@ export const Home = () => {
                   className="d-block w-100"
                   src={serie.picture}
                   alt={serie.name}
-                  style={{width: '30em', height: '30em', objectFit: 'contain'}} // Añade esta línea
+                  style={{width: '30em', height: '30em', objectFit: 'contain'}}
                 />
               </Carousel.Item>
             );
