@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Modal } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 import "./Series.css";
@@ -10,6 +10,8 @@ import { userData } from "../userSlice";
 export const Series = () => {
   const [series, setSeries] = useState([]);
   const [hoveredSerieId, setHoveredSerieId] = useState(null);
+  const [isVideoShown, setIsVideoShown] = useState(false);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState(null);
 
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
@@ -23,6 +25,8 @@ export const Series = () => {
         .catch((error) => console.log(error));
     }
   }, [series]);
+
+  const handleClose = () => setIsVideoShown(false);
 
   return (
     <div className="serieDesign">
@@ -51,9 +55,10 @@ export const Series = () => {
                   {token && (
                     <Button
                       variant="primary"
-                      href={serie.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      onClick={() => {
+                        setIsVideoShown(true);
+                        setCurrentVideoUrl(serie.url);
+                      }}
                     >
                       Ver ahora
                     </Button>
@@ -66,6 +71,20 @@ export const Series = () => {
       ) : (
         <div> Aun no hay series</div>
       )}
+
+      <Modal show={isVideoShown} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Video</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <iframe src={currentVideoUrl} title="Video" width="100%" height="400px" />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
