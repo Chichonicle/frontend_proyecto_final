@@ -67,3 +67,11 @@ export const updateProfile = async (profile, datosRdxUser) => {
       }
     });
   }
+
+  export const GetAllUsers = async (token) => {
+    return await axios.get(`http://localhost:8000/api/users`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
