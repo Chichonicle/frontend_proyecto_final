@@ -1,8 +1,6 @@
 import React from "react";
-
 import "./Header.css";
 import { LinkButton } from "../LinkButton/LinkButton";
-
 import { useSelector, useDispatch } from "react-redux";
 import { logout, userData } from "../../pages/userSlice";
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +11,7 @@ export const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const rdxUser = useSelector(userData);
+  const Admin = rdxUser.credentials?.user?.role === "admin";
 
   const logOutMe = () => {
 
@@ -24,7 +23,25 @@ export const Header = () => {
 
 
   return (
-    <div className="headerDesign">
+    <div className={Admin ? "headerDesignAdmin" : "headerDesign"}>
+
+      {Admin &&(
+        <div className="Role">
+          <h2>Admin</h2>
+        </div>
+      )}
+
+      {Admin && (
+        <div>
+        <LinkButton path={"/allUsers"} title={"Users"} />
+        </div>
+      )}
+
+      {Admin && (
+        <div>
+        <LinkButton path={"/allSalas"} title={"Salas"} />
+        </div>
+      )}
       <LinkButton path={"/"} title={"Home"} />
       <LinkButton path={"/series"} title={"Series"} />
 

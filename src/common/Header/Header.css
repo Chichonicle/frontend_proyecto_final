@@ -13,3 +13,22 @@
     color: white;
     font-weight: bold;
 }
+
+.Role{
+    align-items:start;
+    display: flex;
+    margin-right: 4em;
+    color: gold;
+}
+
+.headerDesignAdmin {
+    color: black;
+    background-color: rgb(0, 0, 0);
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-weight: bold;
+  }
