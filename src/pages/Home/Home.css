@@ -1,0 +1,39 @@
+.homeDesign {
+    min-height: 90vh;
+    width: 100vw;
+    height: auto;
+    margin-top: 0px;
+    background-image: url('../../img/home.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s, transform 2s;
+  }
+  
+  .carousel-item.active {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+  }
+  
+  .carousel-item-next.carousel-item-left,
+  .carousel-item-prev.carousel-item-right {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .carousel-item-next,
+  .carousel-item-prev,
+  .carousel-item.active.carousel-item-left,
+  .carousel-item.active.carousel-item-right {
+    transform: translateX(100%);
+  }

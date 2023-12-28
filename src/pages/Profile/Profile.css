@@ -1,0 +1,41 @@
+.profileDesign {
+
+    height: 90vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('../../img/home.jpg');
+}
+
+.Name {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.buttonSubmit {
+
+    height: 3em;
+    width: 8em;
+
+    border-radius: 1em;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonSubmit:hover {
+
+    transition: 0.4s;
+    background-color: rgb(96, 4, 245);
+    cursor: pointer;
+    color:rgb(255, 255, 255);
+}

@@ -1,0 +1,58 @@
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.serieDesign {
+  min-height: 90vh;
+  width: 100vw;
+  height: cover;
+  justify-items: center;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  background-image: url("../../img/home.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  padding: 2em;
+}
+
+.serieDesign .card {
+  margin: 2em;
+  background-color: #000000aa;
+  color: white;
+  border-radius: 10px;
+  padding: 2em;
+  text-align: center;
+  /* font-size: 1.5em; */
+}
+
+.serieDesign .card:hover {
+  background-color: #000000;
+  color: white;
+  border-radius: 10px;
+  /* padding: 2em; */
+  text-align: center;
+  /* font-size: 1.5em; */
+}
+.serieDesign .card .image-container {
+  position: relative;
+}
+
+.serieDesign .card .image-container .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.serieDesign .card .image-container .overlay .chat-button {
+  z-index: 1;
+}
