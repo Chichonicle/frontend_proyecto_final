@@ -35,7 +35,7 @@ export const Series = () => {
                   <Card.Img variant="top" src={serie.picture} />
                   {hoveredSerieId === serie.id && (
                     <div className="overlay">
-                      <Link to="/chat" className="chat-button">
+                      <Link to={token ? "/chat" : "/login"} className="chat-button">
                         <Button>Ir al chat</Button>
                       </Link>
                     </div>

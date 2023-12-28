@@ -8,7 +8,11 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(136, 100, 253);
+    background-image: url('../../img/home.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; 
 }
 
 .buttonSubmit {
