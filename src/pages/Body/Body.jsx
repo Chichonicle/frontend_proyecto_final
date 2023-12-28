@@ -11,6 +11,8 @@ import { Users } from "../Users/Users";
 
 
 
+
+
 export const Body = () => {
 
 
@@ -24,6 +26,7 @@ export const Body = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/series" element={<Series />} />
             <Route path="/users" element={<Users />} />
+
         </Routes>
         </>
     )
