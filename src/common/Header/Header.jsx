@@ -37,11 +37,7 @@ export const Header = () => {
         </div>
       )}
 
-      {Admin && (
-        <div>
-        <LinkButton path={"/allSalas"} title={"Salas"} />
-        </div>
-      )}
+      
       <LinkButton path={"/"} title={"Home"} />
       <LinkButton path={"/series"} title={"Series"} />
 

@@ -34,7 +34,6 @@ export const Profile = () => {
   });
 
   useEffect(() => {
-    console.log(rdxUser);
   }, [rdxUser]);
 
   useEffect(() => {
