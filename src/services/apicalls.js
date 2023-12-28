@@ -36,16 +36,20 @@ export const updateProfile = async (profile, datosRdxUser) => {
     return await axios.get(`http://localhost:8000/api/series`);
   };
 
-  export const GetMessages = async (token, body) => {
-    return await axios.get(`http://localhost:8000/api/message`, body, {
+  export const GetMessages = async (token) => {
+    const response = await axios.get('http://localhost:8000/api/message', {
       headers: {
-        Authorization: `Bearer ${token}`
+        'Authorization': `Bearer ${token}`
       }
     });
+    return response;
   };
 
-  export const CreateMessage = async (token, body) => {
-    return await axios.post(`http://localhost:8000/api/createMessage`, body , {
+  export const CreateMessage = async (token, salasId, seriesId, message) => {
+    if (!message) {
+      throw new Error('The message field is required.');
+    }
+    return await axios.post(`http://localhost:8000/api/createMessage`, { salas_id: salasId.toString(), series_id: seriesId.toString(), message: message }, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -60,8 +64,8 @@ export const updateProfile = async (profile, datosRdxUser) => {
     });
   }
 
-  export const joinToSerie = async (token, body) => {
-    return await axios.post(`http://localhost:8000/api/member`, body , {
+  export const joinToSerie = async (serieId, token) => {
+    return await axios.post(`http://localhost:8000/api/joinSala`, { series_id: serieId } , {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -76,3 +80,14 @@ export const updateProfile = async (profile, datosRdxUser) => {
     });
   };
 
+  export const isUserMemberofSala = async (token, serieId, salaId) => {
+    return await axios.get(`http://localhost:8000/api/sala/member/${salaId}/${serieId}`, {
+      params: {
+        series_id: serieId,
+        salas_id: salaId
+      },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }

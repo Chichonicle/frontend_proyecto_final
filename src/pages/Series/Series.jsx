@@ -4,7 +4,7 @@ import { Card, Button, Modal } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 import "./Series.css";
-import { GetSeries } from "../../services/apicalls";
+import { GetSeries, joinToSerie } from "../../services/apicalls";
 import { userData } from "../userSlice";
 
 export const Series = () => {
@@ -28,6 +28,16 @@ export const Series = () => {
 
   const handleClose = () => setIsVideoShown(false);
 
+  const handleJoinChat = async (serieId) => {
+    try {
+      const response = await joinToSerie(serieId, token);
+      const salaId = response.data.data.id; console.log(salaId)
+      window.location.href = `/chat/${salaId}/${serieId}`;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="serieDesign">
       {series.length > 0 ? (
@@ -39,9 +49,7 @@ export const Series = () => {
                   <Card.Img variant="top" src={serie.picture} />
                   {hoveredSerieId === serie.id && (
                     <div className="overlay">
-                      <Link to={token ? "/chat" : "/login"} className="chat-button">
-                        <Button>Ir al chat</Button>
-                      </Link>
+                      <Button onClick={() => handleJoinChat(serie.id)}>Ir al chat</Button>
                     </div>
                   )}
                 </div>
