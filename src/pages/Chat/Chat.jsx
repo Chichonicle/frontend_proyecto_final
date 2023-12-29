@@ -1,47 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { CreateMessage, GetMessages } from '../../services/apicalls';
-import './Chat.css';
-import { userData } from '../userSlice';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { CreateMessage, GetMessages } from "../../services/apicalls";
+import "./Chat.css";
+import { userData } from "../userSlice";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export const Chat = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
   const { salasId, seriesId } = useParams();
 
+  const currentUserId = rdxUser.credentials.user.id;
+
   useEffect(() => {
     const fetchMessages = async () => {
-      const response = await GetMessages(token);
-      if (Array.isArray(response.data)) {
-        setMessages(response.data);
+      const response = await GetMessages(token, salasId);
+      if (Array.isArray(response.data.data)) {
+        setMessages(response.data.data);
       } else {
         setMessages([]);
       }
     };
-  
+
     fetchMessages();
-  }, []);
-  
+  }, [salasId]);
+
   const sendMessage = async (event) => {
     event.preventDefault();
-  
-    if (message) {
-      const body = {
-        user_id: rdxUser.id,
-        salas_id: salasId,
-        series_id: seriesId,
-        message: message
-      };
 
+    if (message && salasId) {
       try {
-        const response = await CreateMessage(token, body.salas_id, body.series_id, body.message);
+        const response = await CreateMessage(token, salasId, message);
+
         if (response.data.success) {
           const newMessage = response.data.data;
-          setMessages([...messages, newMessage]);
-          setMessage('');
+          setMessages((oldMessages) => [...oldMessages, newMessage]);
+          setMessage("");
         } else {
           console.error(response.data.message);
         }
@@ -53,20 +49,22 @@ export const Chat = () => {
 
   return (
     <div className="chatDesign">
-    <div className="chat-container">
-      <ul className="chat-messages">
-      {messages.map((message, i) => (
-        <li key={i}>{message.message}</li>
-        ))}
-      </ul>
-      <form className="chat-form" onSubmit={sendMessage}>
-        <input
-          value={message}
-          onChange={(event) => setMessage(event.target.value)}
-        />
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
+      <div className="chat-container">
+        <ul className="chat-messages">
+        {messages.map((message, i) => (
+  <li key={i}>
+    {message.user_id === currentUserId ? 'Yo' : message.username}: {message.message}
+  </li>
+))}
+        </ul>
+        <form className="chat-form" onSubmit={sendMessage}>
+          <input
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+          />
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
     </div>
   );
 };
