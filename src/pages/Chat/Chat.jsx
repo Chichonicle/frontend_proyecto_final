@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { CreateMessage, GetMessages } from '../../services/apicalls';
-import './Chat.css';
-import { userData } from '../userSlice';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { CreateMessage, GetMessages } from "../../services/apicalls";
+import "./Chat.css";
+import { userData } from "../userSlice";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export const Chat = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
@@ -21,21 +21,21 @@ export const Chat = () => {
         setMessages([]);
       }
     };
-  
+
     fetchMessages();
-  }, [salasId]); // Se ejecuta cada vez que cambia salasId
-  
+  }, [salasId]);
+
   const sendMessage = async (event) => {
     event.preventDefault();
-  
+
     if (message && salasId) {
       try {
         const response = await CreateMessage(token, salasId, message);
-  
+
         if (response.data.success) {
           const newMessage = response.data.data;
-          setMessages(oldMessages => [...oldMessages, newMessage]); // Agrega el nuevo mensaje al estado de los mensajes
-          setMessage('');
+          setMessages((oldMessages) => [...oldMessages, newMessage]);
+          setMessage("");
         } else {
           console.error(response.data.message);
         }
@@ -47,20 +47,20 @@ export const Chat = () => {
 
   return (
     <div className="chatDesign">
-    <div className="chat-container">
-      <ul className="chat-messages">
-      {messages.map((message, i) => (
-        <li key={i}>{message.message}</li>
-        ))}
-      </ul>
-      <form className="chat-form" onSubmit={sendMessage}>
-        <input
-          value={message}
-          onChange={(event) => setMessage(event.target.value)}
-        />
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
+      <div className="chat-container">
+        <ul className="chat-messages">
+          {messages.map((message, i) => (
+            <li key={i}>{message.message}</li>
+          ))}
+        </ul>
+        <form className="chat-form" onSubmit={sendMessage}>
+          <input
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+          />
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
     </div>
   );
 };

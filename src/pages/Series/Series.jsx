@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate en lugar de useHistory
+import { useNavigate } from "react-router-dom";
 import { Card, Button, Modal } from "react-bootstrap";
 
 import "./Series.css";
@@ -15,7 +15,7 @@ export const Series = () => {
 
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
-  const navigate = useNavigate(); // Usa useNavigate en lugar de useHistory
+  const navigate = useNavigate();
 
   useEffect(() => {
     GetSeries()
@@ -32,7 +32,7 @@ export const Series = () => {
     } catch (error) {
       console.error(error);
     }
-    navigate(`/chat/${serieId}`); // Navega a la vista de chat de la serie usando navigate
+    navigate(`/chat/${serieId}`);
   };
 
   const handleClose = () => setIsVideoShown(false);
