@@ -12,6 +12,8 @@ export const Chat = () => {
   const token = rdxUser.credentials.token;
   const { salasId, seriesId } = useParams();
 
+  const currentUserId = rdxUser.credentials.user.id;
+
   useEffect(() => {
     const fetchMessages = async () => {
       const response = await GetMessages(token, salasId);
@@ -49,9 +51,11 @@ export const Chat = () => {
     <div className="chatDesign">
       <div className="chat-container">
         <ul className="chat-messages">
-          {messages.map((message, i) => (
-            <li key={i}>{message.message}</li>
-          ))}
+        {messages.map((message, i) => (
+  <li key={i}>
+    {message.user_id === currentUserId ? 'Yo' : message.username}: {message.message}
+  </li>
+))}
         </ul>
         <form className="chat-form" onSubmit={sendMessage}>
           <input
