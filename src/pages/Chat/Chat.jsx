@@ -54,9 +54,14 @@ export const Chat = () => {
           {messages.map((message, i) => (
             <li
               key={i}
-              className={message.user_id === currentUserId ? 'my-message' : 'other-message'}
+              className={
+                message.user_id === currentUserId
+                  ? "my-message"
+                  : "other-message"
+              }
             >
-              {message.user_id === currentUserId ? 'Yo' : message.username}: {message.message}
+              {message.user_id === currentUserId ? "Yo" : message.username}:{" "}
+              {message.message}
             </li>
           ))}
         </ul>
