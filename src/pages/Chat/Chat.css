@@ -1,14 +1,14 @@
 .chatDesign{
-    background-image: url("../../img/home.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
-    padding: 2em;
-    min-height: 90vh;
-    width: 100vw;
-    height: cover;
-    justify-items: center;
+  background-image: url("../../img/home.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  padding: 2em;
+  min-height: 90vh;
+  width: 100vw;
+  height: cover;
+  justify-items: center;
 
 }
 .chat-container {
@@ -41,26 +41,4 @@
   
   .chat-form button {
     flex-shrink: 0;
-  }
-
-  .chat-messages li {
-    max-width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    list-style-type: none;
-  }
-  
-  .chat-messages .my-message {
-    background-color: #dcf8c6;
-    align-self: flex-end;
-    margin-left: 20%;
-    text-align: right;
-  }
-  
-  .chat-messages .other-message {
-    background-color: #f0f0f0;
-    align-self: flex-start;
-    margin-right: 20%;
-    text-align: left;
   }
