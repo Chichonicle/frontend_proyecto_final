@@ -12,33 +12,55 @@
 
 }
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 40em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    overflow: auto;
-    background-color: rgba(127, 255, 212, 0.454);
-   
-  }
-  
-  .chat-messages {
-    flex-grow: 1;
-    overflow: auto;
-  }
-  
-  .chat-form {
-    display: flex;
-    margin-top: 10px;
-  }
-  
-  .chat-form input {
-    flex-grow: 1;
-    margin-right: 10px;
-  }
-  
-  .chat-form button {
-    flex-shrink: 0;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: auto;
+  background-color: rgba(127, 255, 212, 0.454);
+ 
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.chat-form {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chat-form input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.chat-form button {
+  flex-shrink: 0;
+}
+
+.chat-messages li {
+  max-width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  list-style-type: none;
+}
+
+.chat-messages .my-message {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  margin-left: 20%;
+  text-align: right;
+}
+
+.chat-messages .other-message {
+  background-color: #f0f0f0;
+  align-self: flex-start;
+  margin-right: 20%;
+  text-align: left;
+}
