@@ -14,33 +14,27 @@ export const Chat = () => {
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const response = await GetMessages(token);
-      if (Array.isArray(response.data)) {
-        setMessages(response.data);
+      const response = await GetMessages(token, salasId);
+      if (Array.isArray(response.data.data)) {
+        setMessages(response.data.data);
       } else {
         setMessages([]);
       }
     };
   
     fetchMessages();
-  }, []);
+  }, [salasId]); // Se ejecuta cada vez que cambia salasId
   
   const sendMessage = async (event) => {
     event.preventDefault();
   
-    if (message) {
-      const body = {
-        user_id: rdxUser.id,
-        salas_id: salasId,
-        series_id: seriesId,
-        message: message
-      };
-
+    if (message && salasId) {
       try {
-        const response = await CreateMessage(token, body.salas_id, body.series_id, body.message);
+        const response = await CreateMessage(token, salasId, message);
+  
         if (response.data.success) {
           const newMessage = response.data.data;
-          setMessages([...messages, newMessage]);
+          setMessages(oldMessages => [...oldMessages, newMessage]); // Agrega el nuevo mensaje al estado de los mensajes
           setMessage('');
         } else {
           console.error(response.data.message);

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate en lugar de useHistory
 import { Card, Button, Modal } from "react-bootstrap";
-import { Link } from 'react-router-dom';
 
 import "./Series.css";
-import { GetSeries, joinToSerie } from "../../services/apicalls";
+import { GetSeries, createSalaUser } from "../../services/apicalls";
 import { userData } from "../userSlice";
 
 export const Series = () => {
@@ -15,28 +15,27 @@ export const Series = () => {
 
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
+  const navigate = useNavigate(); // Usa useNavigate en lugar de useHistory
 
   useEffect(() => {
-    if (series.length === 0) {
-      GetSeries()
-        .then((series) => {
-          setSeries(series.data.data);
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [series]);
-
-  const handleClose = () => setIsVideoShown(false);
+    GetSeries()
+      .then((series) => {
+        setSeries(series.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleJoinChat = async (serieId) => {
+    const userId = rdxUser.credentials.user.id;
     try {
-      const response = await joinToSerie(serieId, token);
-      const salaId = response.data.data.id; console.log(salaId)
-      window.location.href = `/chat/${salaId}/${serieId}`;
+      await createSalaUser(token, serieId, userId);
     } catch (error) {
       console.error(error);
     }
+    navigate(`/chat/${serieId}`); // Navega a la vista de chat de la serie usando navigate
   };
+
+  const handleClose = () => setIsVideoShown(false);
 
   return (
     <div className="serieDesign">
@@ -44,12 +43,19 @@ export const Series = () => {
         <>
           {series.map((serie) => {
             return (
-              <Card style={{ width: "18rem" }} key={serie.id} onMouseEnter={() => setHoveredSerieId(serie.id)} onMouseLeave={() => setHoveredSerieId(null)}>
+              <Card
+                style={{ width: "18rem" }}
+                key={serie.id}
+                onMouseEnter={() => setHoveredSerieId(serie.id)}
+                onMouseLeave={() => setHoveredSerieId(null)}
+              >
                 <div className="image-container">
                   <Card.Img variant="top" src={serie.picture} />
                   {hoveredSerieId === serie.id && (
                     <div className="overlay">
-                      <Button onClick={() => handleJoinChat(serie.id)}>Ir al chat</Button>
+                      <Button onClick={() => handleJoinChat(serie.id)}>
+                        Ir al chat
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -85,7 +91,12 @@ export const Series = () => {
           <Modal.Title>Video</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe src={currentVideoUrl} title="Video" width="100%" height="400px" />
+          <iframe
+            src={currentVideoUrl}
+            title="Video"
+            width="100%"
+            height="400px"
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
