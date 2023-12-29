@@ -51,11 +51,14 @@ export const Chat = () => {
     <div className="chatDesign">
       <div className="chat-container">
         <ul className="chat-messages">
-        {messages.map((message, i) => (
-  <li key={i}>
-    {message.user_id === currentUserId ? 'Yo' : message.username}: {message.message}
-  </li>
-))}
+          {messages.map((message, i) => (
+            <li
+              key={i}
+              className={message.user_id === currentUserId ? 'my-message' : 'other-message'}
+            >
+              {message.user_id === currentUserId ? 'Yo' : message.username}: {message.message}
+            </li>
+          ))}
         </ul>
         <form className="chat-form" onSubmit={sendMessage}>
           <input
