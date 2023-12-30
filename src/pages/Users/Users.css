@@ -2,9 +2,22 @@
     height: 90vh;
     width: 100vw;
     background-image: url('../../img/home.jpg');
-    justify-items: center;
+    flex-wrap: wrap;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     overflow-y: scroll;
     overflow-x: hidden;
+  }
+
+  .allUsers {
+    display: grid;
+    flex-wrap: wrap;
+    width: 8em;
+  }
+
+  .usersDesign {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    flex-wrap: wrap;
   }

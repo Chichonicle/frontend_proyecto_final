@@ -38,7 +38,7 @@ export const Users = () => {
   return (
     <div className="AllUsersDesign">
       {users.length > 0 ? (
-        <div>
+        <div className="usersDesign">
           {users.map((user) => {
             return (
               <div className="allUsers">

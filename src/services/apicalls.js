@@ -80,14 +80,4 @@ export const updateProfile = async (profile, datosRdxUser) => {
     });
   };
 
-  export const isUserMemberofSala = async (token, serieId, salaId) => {
-    return await axios.get(`http://localhost:8000/api/sala/member/${salaId}/${serieId}`, {
-      params: {
-        series_id: serieId,
-        salas_id: salaId
-      },
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-  }
+
