@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { useNavigate } from "react-router-dom";
-import { GetAllUsers } from "../../services/apicalls";
+import { GetAllUsers, deleteUserById } from "../../services/apicalls";
 import { UsersCards } from "../../common/UsersCards/UsersCards";
 
 export const Users = () => {
@@ -23,6 +23,14 @@ export const Users = () => {
       .catch((error) => console.log(error));
   };
 
+  const handleDelete = (userId) => {
+    deleteUserById(token, userId)
+      .then(() => {
+        loadUsers();
+      })
+      .catch((error) => console.log(error));
+  };
+
   useEffect(() => {
     if (!Admin) {
       navigate("/");
@@ -38,12 +46,11 @@ export const Users = () => {
   return (
     <div className="AllUsersDesign">
       {users.length > 0 ? (
-        <div>
+        <div className="usersDesign">
           {users.map((user) => {
             return (
-              <div className="allUsers">
+              <div className="allUsers" key={user.id}>
                 <UsersCards
-                  key={user.id}
                   name={user.name}
                   surname={user.surname}
                   username={user.username}
@@ -51,6 +58,7 @@ export const Users = () => {
                   role={user.role}
                   is_active={user.is_active}
                 />
+                <button onClick={() => handleDelete(user.id)} className="deleteButton">Borrar</button>
               </div>
             );
           })}

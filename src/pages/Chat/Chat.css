@@ -1,4 +1,4 @@
-.chatDesign{
+.chatDesign {
   background-image: url("../../img/home.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -9,7 +9,6 @@
   width: 100vw;
   height: cover;
   justify-items: center;
-
 }
 .chat-container {
   display: flex;
@@ -21,7 +20,6 @@
   padding: 10px;
   overflow: auto;
   background-color: rgba(127, 255, 212, 0.454);
- 
 }
 
 .chat-messages {

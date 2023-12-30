@@ -80,14 +80,12 @@ export const updateProfile = async (profile, datosRdxUser) => {
     });
   };
 
-  export const isUserMemberofSala = async (token, serieId, salaId) => {
-    return await axios.get(`http://localhost:8000/api/sala/member/${salaId}/${serieId}`, {
-      params: {
-        series_id: serieId,
-        salas_id: salaId
-      },
+  export const deleteUserById = async (token, userId) => {
+    return await axios.delete(`http://localhost:8000/api/users/${userId}`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
   }
+
+

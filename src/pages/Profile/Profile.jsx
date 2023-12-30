@@ -6,7 +6,6 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getProfile, updateProfile } from "../../services/apicalls";
-
 export const Profile = () => {
   const dispatch = useDispatch();
   const rdxUser = useSelector(userData);
@@ -14,6 +13,7 @@ export const Profile = () => {
   const navigate = useNavigate();
   const [isEnabled, setIsEnabled] = useState(true);
   const [msgError, setMsgError] = useState();
+  const [render, setRender] = useState(false); // Nuevo estado
 
   const [profile, setProfile] = useState({
     name: "",
@@ -23,7 +23,6 @@ export const Profile = () => {
     role: "",
     password: "",
   });
-
   const [profileError, setProfileError] = useState({
     nameError: "",
     surnameError: "",
@@ -32,10 +31,8 @@ export const Profile = () => {
     roleError: "",
     passwordError: "",
   });
-
   useEffect(() => {
   }, [rdxUser]);
-
   useEffect(() => {
     setMsgError("");
     for (let test in profile) {
@@ -47,41 +44,35 @@ export const Profile = () => {
           .catch((error) => console.log(error));
       }
     }
-  }, [profile]);
-
-  // useEffect(() => {
-  //   console.log ("Perfil actualizado:", profile);
-  // }, [profile]);
+  }, [profile, render]); // Agregado render al array de dependencias
 
   const errorCheck = (e) => {
     let error = "";
-
     error = validator(e.target.name, e.target.value);
     setProfileError((prevState) => ({
       ...prevState,
       [e.target.name + "Error"]: error,
     }));
   };
-
   const functionHandler = (e) => {
     setProfile((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
-
   const sendData = () => {
     updateProfile(profile, rdxUser)
       .then((result) => {
-        dispatch(login(profile));
+        // Actualiza el estado de Redux con los nuevos datos del perfil
+        dispatch(login(result.data));
         setIsEnabled(true);
+        setRender(!render);
       })
       .catch((error) => {
         console.log(error);
         setIsEnabled(true);
       });
   };
-
   return (
     <div className="profileDesign">
       <div className="Name">Nombre</div>
