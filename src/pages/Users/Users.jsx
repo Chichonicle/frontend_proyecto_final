@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { useNavigate } from "react-router-dom";
-import { GetAllUsers } from "../../services/apicalls";
+import { GetAllUsers, deleteUserById } from "../../services/apicalls";
 import { UsersCards } from "../../common/UsersCards/UsersCards";
 
 export const Users = () => {
@@ -19,6 +19,14 @@ export const Users = () => {
         if (result.data.data.length > 0) {
           setUsers(result.data.data);
         }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleDelete = (userId) => {
+    deleteUserById(token, userId)
+      .then(() => {
+        loadUsers();
       })
       .catch((error) => console.log(error));
   };
@@ -41,9 +49,8 @@ export const Users = () => {
         <div className="usersDesign">
           {users.map((user) => {
             return (
-              <div className="allUsers">
+              <div className="allUsers" key={user.id}>
                 <UsersCards
-                  key={user.id}
                   name={user.name}
                   surname={user.surname}
                   username={user.username}
@@ -51,6 +58,7 @@ export const Users = () => {
                   role={user.role}
                   is_active={user.is_active}
                 />
+                <button onClick={() => handleDelete(user.id)} className="deleteButton">Borrar</button>
               </div>
             );
           })}

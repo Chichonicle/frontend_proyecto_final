@@ -80,4 +80,12 @@ export const updateProfile = async (profile, datosRdxUser) => {
     });
   };
 
+  export const deleteUserById = async (token, userId) => {
+    return await axios.delete(`http://localhost:8000/api/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
 
