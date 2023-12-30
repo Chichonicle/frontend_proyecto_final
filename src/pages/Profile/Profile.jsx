@@ -14,6 +14,7 @@ export const Profile = () => {
   const navigate = useNavigate();
   const [isEnabled, setIsEnabled] = useState(true);
   const [msgError, setMsgError] = useState();
+  const [render, setRender] = useState(false); // Nuevo estado
 
   const [profile, setProfile] = useState({
     name: "",
@@ -47,11 +48,7 @@ export const Profile = () => {
           .catch((error) => console.log(error));
       }
     }
-  }, [profile]);
-
-  // useEffect(() => {
-  //   console.log ("Perfil actualizado:", profile);
-  // }, [profile]);
+  }, [profile, render]); // Agregado render al array de dependencias
 
   const errorCheck = (e) => {
     let error = "";
@@ -73,8 +70,10 @@ export const Profile = () => {
   const sendData = () => {
     updateProfile(profile, rdxUser)
       .then((result) => {
-        dispatch(login(profile));
+        // Actualiza el estado de Redux con los nuevos datos del perfil
+        dispatch(login(result.data));
         setIsEnabled(true);
+        setRender(!render);
       })
       .catch((error) => {
         console.log(error);
