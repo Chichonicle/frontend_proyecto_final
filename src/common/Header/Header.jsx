@@ -17,7 +17,7 @@ export const Header = () => {
     navigate("/")
   }
 
-  
+  // Este useEffect se dispara cuando cambia shouldUpdateHeader, forzando un renderizado del componente
   useEffect(() => {
     console.log('shouldUpdateHeader ha cambiado, forzando un renderizado del componente');
   }, [shouldUpdateHeader]);
@@ -36,7 +36,7 @@ export const Header = () => {
       )}
       <LinkButton path={"/"} title={"Home"} />
       <LinkButton path={"/series"} title={"Series"} />
-      {!rdxUser?.credentials ? (
+      {!rdxUser?.credentials.user ? (
         <>
           <LinkButton path={"/login"} title={"Login"} />
           <LinkButton path={"/register"} title={"Register"} />
