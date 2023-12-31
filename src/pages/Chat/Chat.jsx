@@ -76,10 +76,12 @@ export const Chat = () => {
             >
               {message.user_id === currentUserId ? "Yo" : message.username}:{" "}
               {message.message}
-              <div className="message-actions">
-                <button className="edit-button">Editar</button>
-                <button className="delete-button" onClick={() => deleteMessage(message.id)}>Borrar</button>
-              </div>
+              {message.user_id === currentUserId && (
+                <div className="message-actions">
+                  <button className="edit-button">Editar</button>
+                  <button className="delete-button" onClick={() => deleteMessage(message.id)}>Borrar</button>
+                </div>
+              )}
             </li>
           ))}
         </ul>
