@@ -43,3 +43,9 @@
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.error-message {
+    color: rgb(203, 0, 0);
+    font-size: larger;
+    font-weight: bold;
+}

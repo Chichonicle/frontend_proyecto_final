@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { useNavigate } from "react-router-dom";
 import { logUser } from "../../services/apicalls";
-import { useDispatch } from "react-redux";  //useDispatch es necesario para emitir acciones
+import { useDispatch } from "react-redux";  
 import { login } from "../userSlice";
 
 
@@ -44,7 +43,10 @@ export const Login = () => {
                 },500);
             }
         )
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            setMsgError("Usuario o contraseña incorrectos");
+        });
 
     }
 
@@ -72,8 +74,8 @@ export const Login = () => {
                 functionProp={functionHandler}
                 functionBlur={errorCheck}
             />
+            {msgError && <div className="error-message">{msgError}</div>}
             <div className="buttonSubmit" onClick={logMe}>Log Me!</div>
-            <div>{msgError}</div>
         </div>
     );
 };
