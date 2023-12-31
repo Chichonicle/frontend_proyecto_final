@@ -64,6 +64,14 @@ export const updateProfile = async (profile, datosRdxUser) => {
     });
   }
 
+  export const DeleteMessageByAdmin = async (token, id) => {
+    return await axios.delete(`http://localhost:8000/api/adminMessage/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
   export const createSalaUser = async (token, salasId, userId) => {
     return await axios.post(`http://localhost:8000/api/sala-user`, { salas_id: salasId, user_id: userId } , {
       headers: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CreateMessage, GetMessages, DeleteMessage } from "../../services/apicalls";
+import { CreateMessage, GetMessages, DeleteMessage, DeleteMessageByAdmin } from "../../services/apicalls";
 import "./Chat.css";
 import { userData } from "../userSlice";
 import { useSelector } from "react-redux";
@@ -11,8 +11,8 @@ export const Chat = () => {
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
   const { salasId, seriesId } = useParams();
-
   const currentUserId = rdxUser.credentials.user.id;
+  const isAdmin = rdxUser.credentials.user.role;
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -47,10 +47,17 @@ export const Chat = () => {
     }
   };
 
-  const deleteMessage = async (messageId) => {
+  const deleteMessage = async (messageId, userId) => {
     try {
-      const response = await DeleteMessage(token, messageId);
-
+      let response;
+      if (userId === currentUserId) {
+        response = await DeleteMessage(token, messageId);
+      } else if (isAdmin) {
+        response = await DeleteMessageByAdmin(token, messageId);
+      } else {
+        throw new Error('No tienes permiso para eliminar este mensaje');
+      }
+  
       if (response.data.success) {
         setMessages((oldMessages) => oldMessages.filter(message => message.id !== messageId));
       } else {
@@ -65,25 +72,30 @@ export const Chat = () => {
     <div className="chatDesign">
       <div className="chat-container">
         <ul className="chat-messages">
-          {messages.map((message, i) => (
-            <li
-              key={i}
-              className={
-                message.user_id === currentUserId
-                  ? "my-message"
-                  : "other-message"
-              }
-            >
-              {message.user_id === currentUserId ? "Yo" : message.username}:{" "}
-              {message.message}
-              {message.user_id === currentUserId && (
-                <div className="message-actions">
-                  <button className="edit-button">Editar</button>
-                  <button className="delete-button" onClick={() => deleteMessage(message.id)}>Borrar</button>
-                </div>
-              )}
-            </li>
-          ))}
+        {messages.map((message, i) => (
+  <li
+    key={i}
+    className={
+      message.user_id === currentUserId
+        ? "my-message"
+        : "other-message"
+    }
+  >
+    {message.user_id === currentUserId ? "Yo" : message.username}:{" "}
+    {message.message}
+    {message.user_id === currentUserId && (
+      <div className="message-actions">
+        <button className="edit-button">Editar</button>
+        <button className="delete-button" onClick={() => deleteMessage(message.id)}>Borrar</button>
+      </div>
+    )}
+    {isAdmin && message.user_id !== currentUserId && (
+      <div className="message-actions">
+        <button className="delete-button" onClick={() => deleteMessage(message.id)}>Borrar</button>
+      </div>
+    )}
+  </li>
+))}
         </ul>
         <form className="chat-form" onSubmit={sendMessage}>
           <input
