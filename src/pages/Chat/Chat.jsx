@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CreateMessage, GetMessages } from "../../services/apicalls";
+import { CreateMessage, GetMessages, DeleteMessage } from "../../services/apicalls";
 import "./Chat.css";
 import { userData } from "../userSlice";
 import { useSelector } from "react-redux";
@@ -47,6 +47,20 @@ export const Chat = () => {
     }
   };
 
+  const deleteMessage = async (messageId) => {
+    try {
+      const response = await DeleteMessage(token, messageId);
+
+      if (response.data.success) {
+        setMessages((oldMessages) => oldMessages.filter(message => message.id !== messageId));
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="chatDesign">
       <div className="chat-container">
@@ -62,6 +76,10 @@ export const Chat = () => {
             >
               {message.user_id === currentUserId ? "Yo" : message.username}:{" "}
               {message.message}
+              <div className="message-actions">
+                <button className="edit-button">Editar</button>
+                <button className="delete-button" onClick={() => deleteMessage(message.id)}>Borrar</button>
+              </div>
             </li>
           ))}
         </ul>
