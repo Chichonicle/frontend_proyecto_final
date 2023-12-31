@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { LinkButton } from "../LinkButton/LinkButton";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +11,11 @@ export const Header = () => {
   const rdxUser = useSelector(userData);
   const Admin = rdxUser.credentials?.user?.role === "admin";
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
   
   const logOutMe = () => {
     dispatch(logout({credentials : ""}))
@@ -29,6 +34,11 @@ export const Header = () => {
       {Admin && (
         <div>
         <LinkButton path={"/Users"} title={"Users"} />
+        </div>
+      )}
+      {Admin && (
+        <div>
+        <LinkButton path={"/CreateSerie"} title={"Create Serie"} />
         </div>
       )}
       <LinkButton path={"/"} title={"Home"} />

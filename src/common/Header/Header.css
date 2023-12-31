@@ -7,17 +7,23 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
+    
 
     color: white;
     font-weight: bold;
 }
 
-.Role{
-    align-items:start;
+.Role {
+    align-items: start;
     display: flex;
     margin-right: 4em;
     color: gold;
-   
+    background-image: url('../../img/sagitario.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 3em;
+    margin-bottom: 1em;
 }
 
 .headerDesignAdmin {
@@ -29,9 +35,55 @@
     justify-content: flex-end;
     align-items: flex-end;
     font-weight: bold;
-    background-image: url('../../img/sagitario.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
     background-color: black;
+  }
+
+  @media (max-width: 768px) {
+    .headerDesign,
+    .headerDesignAdmin {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .Role {
+      margin-right: 0;
+      margin-bottom: 1em;
+    }
+  
+    .headerDesignAdmin {
+      background-position: center bottom;
+    }
+  
+    .menu {
+      display: none;
+    }
+  
+    .menu.show {
+      display: block;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .headerDesign,
+    .headerDesignAdmin {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .Role {
+      margin-right: 0;
+      margin-bottom: 1em;
+    }
+  
+    .headerDesignAdmin {
+      background-position: center bottom;
+    }
+  
+    .menu {
+      display: none;
+    }
+  
+    .menu.show {
+      display: block;
+    }
   }
