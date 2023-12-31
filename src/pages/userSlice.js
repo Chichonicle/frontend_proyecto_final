@@ -31,5 +31,3 @@ export const { login, logout, updateHeader } = userSlice.actions;
 export const userData = (state) => state.user;
 
 export default userSlice.reducer;
-
-export const selectShouldUpdateHeader = state => state.user.ShouldUpdateHeader;
