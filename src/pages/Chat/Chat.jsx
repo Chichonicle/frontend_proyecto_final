@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CreateMessage, GetMessages, DeleteMessage, DeleteMessageByAdmin } from "../../services/apicalls";
+import { CreateMessage, GetMessages, DeleteMessage, DeleteMessageByAdmin, UpdateMessage } from "../../services/apicalls";
 import "./Chat.css";
 import { userData } from "../userSlice";
 import { useSelector } from "react-redux";
@@ -8,11 +8,15 @@ import { useParams } from "react-router-dom";
 export const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [editingMessageId, setEditingMessageId] = useState(null);
+  const [editingMessageText, setEditingMessageText] = useState("");
   const rdxUser = useSelector(userData);
   const token = rdxUser.credentials.token;
   const { salasId, seriesId } = useParams();
   const currentUserId = rdxUser.credentials.user.id;
   const isAdmin = rdxUser.credentials.user.role;
+
+  console.log(currentUserId);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -47,10 +51,10 @@ export const Chat = () => {
     }
   };
 
-  const deleteMessage = async (messageId, userId) => {
+  const deleteMessage = async (messageId, messageUserId) => {
     try {
       let response;
-      if (userId === currentUserId) {
+      if (messageUserId === currentUserId) {
         response = await DeleteMessage(token, messageId);
       } else if (isAdmin) {
         response = await DeleteMessageByAdmin(token, messageId);
@@ -60,6 +64,27 @@ export const Chat = () => {
   
       if (response.data.success) {
         setMessages((oldMessages) => oldMessages.filter(message => message.id !== messageId));
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const startEditingMessage = (messageId, messageText) => {
+    setEditingMessageId(messageId);
+    setEditingMessageText(messageText);
+  };
+
+  const saveEditingMessage = async () => {
+    try {
+      const response = await UpdateMessage(token, editingMessageId, editingMessageText);
+
+      if (response.data.success) {
+        setMessages((oldMessages) => oldMessages.map(message => message.id === editingMessageId ? {...message, message: editingMessageText} : message));
+        setEditingMessageId(null);
+        setEditingMessageText("");
       } else {
         console.error(response.data.message);
       }
@@ -81,12 +106,22 @@ export const Chat = () => {
         : "other-message"
     }
   >
-    {message.user_id === currentUserId ? "Yo" : message.username}:{" "}
-    {message.message}
+    <div className="message-content">
+      {message.user_id === currentUserId ? "Yo" : message.username}:{" "}
+      {editingMessageId === message.id ? (
+        <input value={editingMessageText} onChange={(event) => setEditingMessageText(event.target.value)} />
+      ) : (
+        message.message
+      )}
+    </div>
     {message.user_id === currentUserId && (
       <div className="message-actions">
-        <button className="edit-button">Editar</button>
-        <button className="delete-button" onClick={() => deleteMessage(message.id)}>Borrar</button>
+        {editingMessageId === message.id ? (
+          <button onClick={saveEditingMessage}>Guardar</button>
+        ) : (
+          <button onClick={() => startEditingMessage(message.id, message.message)}>Editar</button>
+        )}
+      <button className="delete-button" onClick={() => deleteMessage(message.id, message.user_id)}>Borrar</button>
       </div>
     )}
     {isAdmin && message.user_id !== currentUserId && (

@@ -64,6 +64,14 @@ export const updateProfile = async (profile, datosRdxUser) => {
     });
   }
 
+  export const UpdateMessage = async (token, id, message) => {
+    return await axios.put(`http://localhost:8000/api/updateMessage/${id}`, { message: message }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
   export const DeleteMessageByAdmin = async (token, id) => {
     return await axios.delete(`http://localhost:8000/api/adminMessage/${id}`, {
       headers: {
