@@ -6,6 +6,7 @@ import { Profile } from "../Profile/Profile";
 import { Series } from "../Series/Series";
 import { Users } from "../Users/Users";
 import { Chat } from "../Chat/Chat";
+import CreateSerie from "../CreateSerie/CreateSerie";
 
 
 
@@ -28,6 +29,7 @@ export const Body = () => {
             <Route path="/series" element={<Series />} />
             <Route path="/users" element={<Users />} />
             <Route path="/chat/:salasId" element={<Chat />} />
+            <Route path="/CreateSerie" element={<CreateSerie />} />
 
 
         </Routes>

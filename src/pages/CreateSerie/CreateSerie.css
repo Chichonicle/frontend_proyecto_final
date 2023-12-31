@@ -1,0 +1,68 @@
+.CreateSerieDesign {
+    height: 90vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('../../img/home.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+.CreateSerieForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50em;
+    padding: 1.5em;
+    box-shadow: 0 0 0.6em 0 rgba(0,0,0,0.1);
+    border-radius: 0.6em;
+}
+
+.CreateSerieDesign form {
+    width: 100%;
+}
+
+.CreateSerieDesign .form-group {
+    margin-bottom: 1em;
+}
+
+.CreateSerieDesign .form-control {
+    height: 2.5em;
+    border-radius: 0.3125em;
+    border: 0.15em solid #0127c0;
+    background-color: #40f2c0b0;
+
+}
+
+.CreateSerieDesign .btn {
+    width: 100%;
+    background-color: #000eab;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 0.6em;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 2em;
+    align-items: center;
+    justify-content: center;
+}
+
+.CreateSerieDesign .btn:hover {
+    background-color: #0056b3;
+}
+
+.CreateSerieDesign label {
+    color: #080000;
+    font-size: 1.2em;
+    font-weight: bold;
+}

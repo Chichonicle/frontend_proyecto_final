@@ -105,3 +105,12 @@ export const updateProfile = async (profile, datosRdxUser) => {
   }
 
 
+  export const CreateSerie = async (token, serie) => {
+    return await axios.post(`http://localhost:8000/api/serie`, serie, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+
