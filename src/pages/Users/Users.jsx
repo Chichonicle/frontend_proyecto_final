@@ -9,7 +9,7 @@ import { UsersCards } from "../../common/UsersCards/UsersCards";
 export const Users = () => {
   const [users, setUsers] = useState([]);
   const rdxUser = useSelector(userData);
-  const token = rdxUser.credentials.token; 
+  const token = rdxUser.credentials.token;
   const Admin = rdxUser.credentials?.user?.role === "admin";
   const navigate = useNavigate();
 
@@ -58,7 +58,12 @@ export const Users = () => {
                   role={user.role}
                   is_active={user.is_active}
                 />
-                <button onClick={() => handleDelete(user.id)} className="deleteButton">Borrar</button>
+                <button
+                  onClick={() => handleDelete(user.id)}
+                  className="deleteButton"
+                >
+                  Borrar
+                </button>
               </div>
             );
           })}

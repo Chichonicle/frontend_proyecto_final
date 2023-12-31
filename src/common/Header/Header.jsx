@@ -3,7 +3,7 @@ import "./Header.css";
 import { LinkButton } from "../LinkButton/LinkButton";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, userData } from "../../pages/userSlice";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -16,29 +16,27 @@ export const Header = () => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-  
+
   const logOutMe = () => {
-    dispatch(logout({credentials : ""}))
-    navigate("/")
-  }
-
-
+    dispatch(logout({ credentials: "" }));
+    navigate("/");
+  };
 
   return (
     <div className={Admin ? "headerDesignAdmin" : "headerDesign"}>
-      {Admin &&(
+      {Admin && (
         <div className="Role">
           <h2>Admin</h2>
         </div>
       )}
       {Admin && (
         <div>
-        <LinkButton path={"/Users"} title={"Users"} />
+          <LinkButton path={"/Users"} title={"Users"} />
         </div>
       )}
       {Admin && (
         <div>
-        <LinkButton path={"/CreateSerie"} title={"Create Serie"} />
+          <LinkButton path={"/CreateSerie"} title={"Create Serie"} />
         </div>
       )}
       <LinkButton path={"/"} title={"Home"} />
@@ -50,7 +48,10 @@ export const Header = () => {
         </>
       ) : (
         <>
-          <LinkButton path={"/profile"} title={rdxUser.credentials.user.username} />
+          <LinkButton
+            path={"/profile"}
+            title={rdxUser.credentials.user.username}
+          />
           <div onClick={logOutMe}>
             <LinkButton path={"/"} title={"Logout"} />
           </div>

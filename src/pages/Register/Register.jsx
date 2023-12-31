@@ -79,7 +79,7 @@ export const Register = () => {
         functionProp={functioHandler}
         functionBlur={errorCheck}
       />
-       <div className="errorMsg">{userError.nameError}</div>
+      <div className="errorMsg">{userError.nameError}</div>
       <div className="Name">Surname</div>
       <CustomInput
         design={`inputDesign ${
@@ -129,7 +129,6 @@ export const Register = () => {
       />
       <div className="errorMsg">{userError.passwordError}</div>
 
-     
       <div className="buttonSubmit" onClick={Submit}>
         Submit
       </div>

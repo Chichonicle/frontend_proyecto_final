@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Carousel } from 'react-bootstrap'; 
+import { Carousel } from "react-bootstrap";
 
 import "./Home.css";
 import { GetSeries } from "../../services/apicalls";
 
 export const Home = () => {
-  const  [series, setSeries] = useState([]);
+  const [series, setSeries] = useState([]);
 
   useEffect(() => {
     if (series.length === 0) {
       GetSeries()
-      .then((series)=>{
-        setSeries(series.data.data);
-      })
-      .catch((error) => console.log(error));
+        .then((series) => {
+          setSeries(series.data.data);
+        })
+        .catch((error) => console.log(error));
     }
-  },[series]);
+  }, [series]);
 
   return (
     <div className="homeDesign">
@@ -28,7 +28,11 @@ export const Home = () => {
                   className="d-block w-100"
                   src={serie.picture}
                   alt={serie.name}
-                  style={{width: '30em', height: '30em', objectFit: 'contain'}}
+                  style={{
+                    width: "30em",
+                    height: "30em",
+                    objectFit: "contain",
+                  }}
                 />
               </Carousel.Item>
             );
@@ -38,5 +42,5 @@ export const Home = () => {
         <div> Aun no hay series</div>
       )}
     </div>
-);
+  );
 };
