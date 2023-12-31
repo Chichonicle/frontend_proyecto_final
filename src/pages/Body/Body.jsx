@@ -6,7 +6,7 @@ import { Profile } from "../Profile/Profile";
 import { Series } from "../Series/Series";
 import { Users } from "../Users/Users";
 import { Chat } from "../Chat/Chat";
-import CreateSerie from "../CreateSerie/CreateSerie";
+import {CreateSerie} from "../CreateSerie/CreateSerie";
 
 
 

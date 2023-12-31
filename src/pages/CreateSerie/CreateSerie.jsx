@@ -1,66 +1,91 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import "./CreateSerie.css";
+import { NewSerie } from "../../services/apicalls";
+import { userData } from "../userSlice";
+import { useSelector } from "react-redux";
+import { CustomInput } from "../../common/CustomInput/CustomInput";
+import { useNavigate } from "react-router";
 
-const CreateSerie = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    genre: '',
-    year: '',
-    url: '',
-    picture: ''
+export const CreateSerie = () => {
+  const rdxUser = useSelector(userData);
+  const token = rdxUser.credentials.token;
+  const navigate = useNavigate();
+
+  const [serie, setSerie] = useState({
+    name: "",
+    genre: "",
+    year: "",
+    url: "",
+    picture: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const functioHandler = (e) => {
+    setSerie((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      CreateSerie(formData);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const Submit = () => {
+    NewSerie(serie, token)
+      .then((resultado) => {
+        console.log(resultado);
+
+        setTimeout(() => {
+          navigate("/series");
+        }, 500);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
     <div className="CreateSerieDesign">
-    <div className="CreateSerieForm">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="name">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} required />
-        </Form.Group>
-
-        <Form.Group controlId="genre">
-          <Form.Label>Genero</Form.Label>
-          <Form.Control type="text" name="genre" value={formData.genre} onChange={handleChange} required />
-        </Form.Group>
-
-        <Form.Group controlId="year">
-          <Form.Label>Año</Form.Label>
-          <Form.Control type="text" name="year" value={formData.year} onChange={handleChange} required />
-        </Form.Group>
-
-        <Form.Group controlId="url">
-          <Form.Label>URL</Form.Label>
-          <Form.Control type="text" name="url" value={formData.url} onChange={handleChange} required />
-        </Form.Group>
-
-        <Form.Group controlId="picture">
-          <Form.Label>Imagen</Form.Label>
-          <Form.Control type="text" name="picture" value={formData.picture} onChange={handleChange} required />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
+      <div className="CreateSerieForm">
+        <div className="Name">Name</div>
+        <CustomInput
+          design="inputDesign"
+          type={"text"}
+          name={"name"}
+          placeholder={""}
+          functionProp={functioHandler}
+        />
+        <div className="Name">Genre</div>
+        <CustomInput
+          design="inputDesign"
+          type={"text"}
+          name={"genre"}
+          placeholder={""}
+          functionProp={functioHandler}
+        />
+        <div className="Name">Year</div>
+        <CustomInput
+          design="inputDesign"
+          type={"text"}
+          name={"year"}
+          placeholder={""}
+          functionProp={functioHandler}
+        />
+        <div className="Name">Url</div>
+        <CustomInput
+          design="inputDesign"
+          type={"text"}
+          name={"url"}
+          placeholder={""}
+          functionProp={functioHandler}
+        />
+        <div className="Name">Picture</div>
+        <CustomInput
+          design="inputDesign"
+          type={"text"}
+          name={"picture"}
+          placeholder={""}
+          functionProp={functioHandler}
+        />
+        <div className="buttonSubmit" onClick={Submit}>
           Create Serie
-        </Button>
-      </Form>
-    </div>
+        </div>
+      </div>
     </div>
   );
 };
-
-export default CreateSerie;
