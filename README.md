@@ -18,49 +18,49 @@ Para poder ver el backend puedes acceder haciendo click aqui:
 - Home:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/HomeUser.png" style="max-width: 100%;" width="">
+      <img src="src/img/HomeUser.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
 - Register:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/Register.png" style="max-width: 100%;" width="">
+      <img src="src/img/Register.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
 - Login:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/Login.png" style="max-width: 100%;" width="">
+      <img src="src/img/Login.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
 - Profile:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/Profile.png" style="max-width: 100%;" width="">
+      <img src="src/img/Profile.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
 - Sala de chat:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/Chat.png" style="max-width: 100%;" width="">
+      <img src="src/img/Chat.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
 - Vista de series:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/Series.png" style="max-width: 100%;" width="">
+      <img src="src/img/Series.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
 - Visionado de series:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/Visionado.png" style="max-width: 100%;" width="">
+      <img src="src/img/Visionado.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
@@ -71,20 +71,20 @@ Para poder ver el backend puedes acceder haciendo click aqui:
 - Gestión de usuarios:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/Users.png" style="max-width: 100%;" width="">
+      <img src="src/img/Users.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
 - Gestión de series:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/CreateSerie.png" style="max-width: 100%;" width="">
+      <img src="src/img/CreateSerie.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 - Cabecera:
 <p>
    <div align="center">
-      <img src="../proyecto-final-frontend/src/img/CabeceraAdmin.png" style="max-width: 100%;" width="">
+      <img src="src/img/CabeceraAdmin.png" style="max-width: 100%;" width="">
    </div>    
 </p>
 
